@@ -59,30 +59,6 @@ function shuffle(deck) {
 
     readyDeck(deck)
 
-    
-    // These two functions are called when you win or lose
-    // They have a passive section however once you click on the button it refreshes the page, restarting the game
-    function wrongRestart(){
-        clearInterval(interval)
-        $('#buttons *').prop('disabled',true)
-        $('#losingScreen').show(2000)
-        $('#losingScreen').on('click','button',function(){
-            $("#losingScreen").hide(1000)
-            window.location.reload()
-            return
-    })
-    }
-    function correctRestart(){
-        clearInterval(interval)
-        $('#buttons *').prop('disabled',false)
-        $('#winningScreen').show(1000)
-        $('#winningScreen').on('click','button',function(){
-            $("#winningScreen").hide(1000), window.location.reload()
-            return
-        }) 
-    }
-    
-
     // /////////////////////////////// //
     // STARTS THE GAME FUNTION IN THE APP
     function newGame(){
@@ -111,14 +87,11 @@ function shuffle(deck) {
     //   IF ELSE statements
       if(firstValue ===  ''){
         firstValue = thisValue
-        console.log(firstValue)
 
       }else if(firstValue !==  '' && secondValue ===  ''){
           secondValue = thisValue
-          console.log(secondValue)
           $('#buttons *').prop('disabled', true)
-          
-         
+
         //   if the cards match addClass stay so they remain flipped
             if(firstValue === secondValue){
                 setTimeout(function(){
@@ -127,22 +100,34 @@ function shuffle(deck) {
                 matchedCards.push(firstValue)
                 newArray[1].addClass('stay')
                 matchedCards.push(secondValue)
+                $("#buttons *").prop('disabled', false)
+                console.log(matchedCards)
                 // we clear the variables
                 firstValue = ''
                 secondValue = ''
                 newArray = []
                 attempts = attempts
-                //this checks if the 2 mentioned arrays match and then run the function
-                if(matchedCards.length == deck.length){
-                  correctRestart()
-                  return
-                }
                 // Updates the remaining guesses
+                // $('#buttons *').prop('disabled',false)
                 $("#guess").html(`Guesses Remaining: ${attempts}`)
                 $('#message').html('Awesome keep going!') 
-                $('#buttons *').prop('disabled',false)
-        
+                
+                //this checks if the 2 mentioned arrays match and then run the function
+                if(matchedCards.length == deck.length){
+                    // These two functions are called when you win or lose
+                    // They have a passive section however once you click on the button it refreshes the page, restarting the game
+                    clearInterval(interval)
+                    $('#buttons *').prop('disabled',false)
+                    $('#winningScreen').show(1000)
+                    $('#winningScreen').on('click','button',function(){
+                        $("#winningScreen").hide(1000)
+                         window.location.reload()
+                        return
+                    }) 
+                }
+                
                 },1000)  
+                
             }else if(firstValue !== secondValue){
                 setTimeout(function(){
                 newArray[0].removeClass('stay')
@@ -152,8 +137,14 @@ function shuffle(deck) {
                 newArray = []
                 attempts --
                 if(attempts == ''){
-                    wrongRestart()
-                    return 
+                    clearInterval(interval)
+                    $('#buttons *').prop('disabled',true)
+                    $('#losingScreen').show(2000)
+                    $('#losingScreen').on('click','button',function(){
+                        $("#losingScreen").hide(1000)
+                        window.location.reload()
+                        return
+                    })
                 }
                 $("#guess").html(`Guesses Remaining: ${attempts}`)
                 $('#message').html('You gotta try harder than that.') 
