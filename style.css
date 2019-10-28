@@ -1,42 +1,191 @@
 html {
     box-sizing: border-box;
-    width: 100%;
-    font-size: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Quantico';
   }
   *,
   *::after,
   *::before {
     box-sizing: inherit;
   }
-  h1{
-      display: flex;
-      justify-content: center;
+  body{
+    margin: 0;
   }
-  #card-array {
-    display: flex;
-    flex-wrap: wrap;
-    width: 1200px;
+ #container{
+    background-image: url('./nbaimages/bcourt.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: top;
+    perspective: 500px;
     margin: auto;
     height: auto;
+    position: relative;
+ }
+ /* Title */
+  h1{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
   }
-  
-  #buttons button {
-    width: 200px;
-    height: 300px;
+/* The array of the cards gives the dimensions  */
+  #card-array {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1200px;
+    height: 1400px;
     margin: auto;
+    /* transform: scale(0.9) */
+  }
+  /* Each individual card */
+  #buttons{
+    height: 250px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     font-size: 2rem;
+    transform: scale(0.9);
     outline: none;
   }
   
-  .face-down {
-    background: black;
+  /* the class placed for each card in main.js */
+  .wholecard {
+    position: relative;
+    border-radius: 30px;
+    width: 175px;
+    height: 175px;
+    background: #bb8241;
+    transform: scale(0.8);
+    padding: 50px;
   }
   
-  .stay{
-    background:white;
+  /* transform gives the effect of the card flip */
+  .stay .backmatch{
+    transform: rotateY(-180deg);;
   }
-  .imagesize{
-      width:100%;
-      height:100%;
+  .stay .facematch{
+    transform: rotateY(0);
   }
+  .facematch{
+    transform: rotateY(180deg);
+}
+ 
+/* a class placed in main.js  */
+  .card{
+    width:175px;
+    height: 235px;
+    position: absolute;
+    top: 6px;
+    border: 3px solid black;
+    border-radius: 30px;
+    background: white;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transition: transform 500ms ease-in-out;
+  }
+  
+  .backmatch{
+    background-image:url('./nbaimages/NBA.png');
+   
+  }
+  
+  .nba{
+    align-self: flex-start;
+    width:175px;
+    height: 175px;   
+    position: absolute;
+    top: 27px; 
+  }
+  .logos{
+    width:175px;
+    height: 175px; 
+    position: absolute;
+    top: 25px;
+    left:-2px;
+  }
+ .keep{
+    transform: rotateY(180deg);
+ }
+ /*STATUS*/
+ #status{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #757575;
+    height: 40px
+ }
+ #message{
+    font-size:30px;
+ }
+ #guess{
+    font-size: 30px;
+ }
+ #time{
+   color: red;
+   font-size: 25px
+ }
+ /* Start, Win, and Losing Screen */
+
+ #losingScreen{
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    align-items: center;
+    background: red ;
+    text-align: center;
+ }
+ #losingScreen p{
+    font-size: 30px;
+ }
+ #winningScreen{
+    z-index: 10;
+    background: grey ;
+    text-align: center;
+    font-size: 35px;
+ }
+ #trophy{
+    width: 200px;
+    height: 350px;
+ }
+ .winimg{
+  width: 400px;
+  height: 350px;
+  margin: 0;
+ }
+ #introScreen{
+  z-index: 10;
+  background: rgb(64, 74, 119);
+  text-align: center;
+  font-size: 35px;
+  color: white;
+  position: relative;
+  margin:0;
+ }
+ #newGame,#twotime{
+  background: none;
+  border: 2px black solid;
+  outline: none;
+  margin: 0px 0px 5px 15px;
+  width: 105px;
+  height: 50px;
+  font-size: 20px
+ }
+ #new{
+   color: white;
+ background: none;
+  border: 2px white solid;
+  outline: none;
+  margin: 0px 0px 0px 10px;
+  width: 155px;
+  height: 50px;
+  font-size: 20px
+ }
+ #newGame:hover, #twotime:hover{
+   background: white;
+   transform: scale(1.1);
+   transition: 300ms ease-in-out all;
+ }
+ #new:hover{
+ background: black;
+ transform: scale(1.1);
+ transition: 300ms ease-in-out all;
+ }
