@@ -102,9 +102,7 @@ html {
     top: 25px;
     left:-2px;
   }
- .keep{
-    transform: rotateY(180deg);
- }
+  
  /*STATUS*/
  #status{
     display: flex;

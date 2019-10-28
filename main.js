@@ -54,7 +54,6 @@ function shuffle(deck) {
         })
        //adds the buttons in HTML through jQuery 
         $("#buttons").html(teams)
-       
       }
 
     readyDeck(deck)
@@ -82,8 +81,6 @@ function shuffle(deck) {
       newArray.push($(this))
       $(this).addClass('stay')
       
-      
-    
     //   IF ELSE statements
       if(firstValue ===  ''){
         firstValue = thisValue
@@ -110,8 +107,18 @@ function shuffle(deck) {
                 // Updates the remaining guesses
                 // $('#buttons *').prop('disabled',false)
                 $("#guess").html(`Guesses Remaining: ${attempts}`)
-                $('#message').html('Awesome keep going!') 
-                
+                  if( matchedCards.length === 10 ){
+                    $('#message').html('Congrates, You are in the playoffs!')
+                  }else if(matchedCards.length === 12){
+                    $('#message').html('Man, were they evening playing, passed the First Round!')
+                  }else if(matchedCards.length === 14){
+                    $('#message').html('Your an animal on the court, made it to the Second Round!')
+                  }else if(matchedCards.length === 16){
+                    $('#message').html('Your in your Conference Final!')
+                  }
+                  else(
+                    $('#message').html('Awesome keep going!') 
+                  )
                 //this checks if the 2 mentioned arrays match and then run the function
                 if(matchedCards.length == deck.length){
                     // These two functions are called when you win or lose
